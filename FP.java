@@ -1,7 +1,7 @@
 
 import java.io.*;
 import java.util.*;
-
+import javax.swing.*;  
 
 
 
@@ -10,10 +10,21 @@ public class FP {
 
 	private static final String FILENAME = "file.txt";
 
+
+
+
+
+
+
+
+
 //method to print tree by taking the root node by recurssion.
 	public static void printtree(node n)
 	{
-		System.out.println("node " +n.name+" count "+ n.count);
+String x=" ";		if(n.parent!=null)
+		{ x=n.parent.name;
+		}
+		System.out.println("node " +n.name+" count "+ n.count+"parent"+x+"   x cordinate "+n.x+" y cordinate  "+n.depth);
 		ArrayList<node> c=n.getchild();
 		if(!c.isEmpty())//checks if the current node has childnodes or not
 		{
@@ -29,6 +40,42 @@ public class FP {
 			return;
 		}
 	}	
+
+static int xcc;
+
+public static void depthtree(node n)
+	{
+String x=" ";	
+if(n.parent!=null)
+		{ x=n.parent.name;
+		n.depth=n.parent.depth+1;
+		}
+		n.x=xcc;
+		ArrayList<node> c=n.getchild();
+		
+		if(!c.isEmpty())//checks if the current node has childnodes or not
+		{
+			Iterator<node> iterator = c.iterator();
+			while(iterator.hasNext())
+			{
+						
+				depthtree(iterator.next());//for each childnode call the function.
+			}
+		}
+		else
+		{
+			System.out.println("end of branch+-------------------efs--------");
+			xcc++;
+			return;
+		}
+	}	
+
+
+
+
+
+
+
 
 	public static void main(String[] args) {
 	HashMap<String, Integer> map = new HashMap<String, Integer>();
@@ -153,7 +200,10 @@ System.out.println("parents child  "+parent.getchild().toString());
 
 }
 System.out.println("parents child  "+parent.name);
+parent.depth=0;
+xcc=0;
 
+depthtree(parent);//adds cordinates
 printtree(parent);
 
 

@@ -1,15 +1,19 @@
 import java.io.*;
-
+import java.util.*;
 
 class node{
 String name;
 int count;
 ArrayList <node> child;
 node parent;
+int depth;
+int x;
 node()
 {
 count=1;
 parent=null;
+depth=0;
+x=0;
 child=new ArrayList<node>();
 }
 void setname(String s)
